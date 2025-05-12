@@ -629,8 +629,8 @@ const openColumnsMenu = () => {
       .join(" ");
   return (
     <div className="p-4">
-      <div className="flex justify-between mb-4">
-        <h2 className="text-lg font-semibold">Campaign Overview</h2>
+      <div className="flex justify-end mb-4">
+        {/* <h2 className="text-lg font-semibold">Campaign Overview</h2> */}
         <div className="flex space-x-3">
           <button className="bg-transparent  text-gray-600 px-4 py-2 rounded  hover:bg-slate-100">
             <IoMdShareAlt className="ml-5 h-4 text-xl" />

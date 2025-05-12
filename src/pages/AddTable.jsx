@@ -4,6 +4,7 @@ import AudienceDataComponent from "./AddTable/Audiences";
 import GenderInfo from "./AddTable/Genderinfo";
 import BidStrategyType from "./AddTable/BidStrategyType";
 import CustomTable from "./AddTable/CustomTable";
+import CampaignType from "./AddTable/CampaignType";
 import {
   Select,
   MenuItem,
@@ -29,9 +30,20 @@ const tableConfig = {
     title: "Group Metrics",
     component: CustomTable,
   },
+  campaignType: {
+    title: "Campaign Type",
+    component: CampaignType,
+  },
 };
 
-const AddTable = ({ startDate, endDate, userId }) => {
+const AddTable = ({
+  startDate,
+  endDate,
+  userId,
+  customerId,
+  initialDateRange,
+  uniqueCategories,
+}) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [createdTables, setCreatedTables] = useState([]);
@@ -42,7 +54,7 @@ const AddTable = ({ startDate, endDate, userId }) => {
   useEffect(() => {
     const fetchTables = async () => {
       if (!userId) {
-        setCreatedTables([]); // Clear tables on logout
+        setCreatedTables([]);
         setLoading(false);
         return;
       }
@@ -51,8 +63,16 @@ const AddTable = ({ startDate, endDate, userId }) => {
       try {
         const res = await fetch(`/api/user-tables?userId=${userId}`);
         const data = await res.json();
+
         if (res.ok && Array.isArray(data)) {
-          setCreatedTables(data);
+          let tables = [...data];
+          // Ensure CampaignType is added by default
+          if (!tables.includes("campaignType")) {
+            tables.push("campaignType");
+            await saveTables(tables);
+          }
+
+          setCreatedTables(tables);
         } else {
           throw new Error("Invalid data format");
         }
@@ -65,9 +85,8 @@ const AddTable = ({ startDate, endDate, userId }) => {
     };
 
     fetchTables();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
-
-  // Save tables to backend
   const saveTables = async (tables) => {
     if (!userId) return;
     try {
@@ -158,22 +177,35 @@ const AddTable = ({ startDate, endDate, userId }) => {
         <p className="text-red-500 mt-4">{error}</p>
       ) : (
         createdTables.map((tableKey) => {
-          const TableComponent = tableConfig[tableKey].component;
+          const config = tableConfig[tableKey];
+          if (!config) return null;
+
+          const TableComponent = config.component;
+
           return (
             <div key={tableKey} className="mt-8 w-full max-w-9xl">
               <div className="flex items-center justify-between">
                 <h2 className="text-2xl font-semibold text-blue-600">
-                  {tableConfig[tableKey].title}
+                  {config.title}
                 </h2>
                 <button
                   className="p-2 text-lg bg-red-600 text-white rounded-sm"
                   onClick={() => handleCloseTable(tableKey)}
-                  aria-label={`Close ${tableConfig[tableKey].title}`}
+                  aria-label={`Close ${config.title}`}
                 >
                   <IoMdClose />
                 </button>
               </div>
-              <TableComponent startDate={startDate} endDate={endDate} />
+
+              {tableKey === "campaignType" ? (
+                <TableComponent
+                  customerId={customerId}
+                  initialDateRange={initialDateRange}
+                  uniqueCategories={uniqueCategories}
+                />
+              ) : (
+                <TableComponent startDate={startDate} endDate={endDate} />
+              )}
             </div>
           );
         })

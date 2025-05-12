@@ -672,6 +672,11 @@ const Ads = () => {
     };
   }, [popupData.isVisible]);
 
+  const handleApply = () => {
+    setShowDatePicker(false); // Hide the dropdown on Apply
+  };
+
+
   const totalPages = Math.ceil(data.length / rowsPerPage);
 
   // Get the current page data
@@ -707,6 +712,12 @@ const Ads = () => {
       default:
         return value;
     }
+  };
+
+  const handleClick = () => {
+   handleApply();
+   fetchAdGroupData();
+
   };
 
   return (
@@ -747,7 +758,7 @@ const Ads = () => {
                   />
                   <div className=" flex flex-row  justify-between items-center mb-2 mx-2">
                     <button
-                      onClick={fetchAdGroupData} // Call API when dates are selected
+                      onClick={handleClick} // Call API when dates are selected
                       className="bg-blue-500 text-white px-4 py-2 rounded text-center mt-2"
                     >
                       Apply
@@ -1068,7 +1079,11 @@ const Ads = () => {
                                 .map((col) => (
                                   <th
                                     key={col.key}
-                                    className="py-3 px-6 text-left w-auto "
+                                    className={`py-3 px-6 border-r-2 border-gray-300 text-left w-auto ${
+                                      col.sticky
+                                        ? "sticky left-0 bg-gray-200 z-10 shadow-md"
+                                        : ""
+                                    }`}
                                   >
                                     <button
                                       className="flex flex-row justify-between items-center w-full h-full"
@@ -1109,7 +1124,11 @@ const Ads = () => {
                                   .map((col) => (
                                     <td
                                       key={col.key}
-                                      className="py-3 px-6 text-left w-auto"
+                                      className={`py-3 px-6 border-r-2 border-gray-200  text-left w-auto${
+                                col.sticky
+                                  ? "sticky left-0 bg-gray-100 z-10 shadow-md"
+                                  : ""
+                              }`}
                                     >
                                       {col.key === "headlines" ? (
                                         <span
@@ -1140,8 +1159,7 @@ const Ads = () => {
                                               </div>
                                             ))
                                           ) : (
-                                            <span className="text-gray-400 text-xs">
-                                            </span>
+                                            <span className="text-gray-400 text-xs"></span>
                                           )}
                                         </div>
                                       ) : col.key === "status" ? (
@@ -1156,13 +1174,13 @@ const Ads = () => {
                                           }}
                                         >
                                           {item.status === "ENABLED" && (
-                                            <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                                            <div className="w-3 h-3 bg-green-700 rounded-full mr-2"></div>
                                           )}
                                           {item.status === "PAUSED" && (
                                             <div className="w-3 h-3 bg-gray-500 rounded-full mr-2"></div>
                                           )}
                                           {item.status === "REMOVED" && (
-                                            <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
+                                            <div className="w-3 h-3 bg-red-700 rounded-full mr-2"></div>
                                           )}
                                         </div>
                                       ) : (
@@ -1278,7 +1296,7 @@ const Ads = () => {
                                   changeStatusTo("ENABLED");
                                 }}
                               >
-                                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <div className="w-3 h-3 bg-green-700 rounded-full"></div>
                                 <p className="text-left font-semibold text-sm">
                                   Enable
                                 </p>
@@ -1295,7 +1313,7 @@ const Ads = () => {
                                   changeStatusTo("PAUSED");
                                 }}
                               >
-                                <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
+                                <div className="w-3 h-3 bg-gray-500 rounded-full text-white text-xs flex items-center justify-center">⏸</div>
                                 <p className="text-left font-semibold text-sm">
                                   Pause
                                 </p>
@@ -1311,7 +1329,7 @@ const Ads = () => {
                                   changeStatusTo("REMOVED");
                                 }}
                               >
-                                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                                <div className="w-3 h-3 bg-red-700 text-white text-xs rounded-full flex items-center justify-center">×</div>
                                 <p className="text-left font-semibold text-sm">
                                   Remove
                                 </p>
@@ -1391,7 +1409,7 @@ const Ads = () => {
                                           <span
                                             className={`w-2.5 h-2.5 rounded-full ${
                                               item[col.key] === "ENABLED"
-                                                ? "bg-green-500"
+                                                ? "bg-green-700"
                                                 : item[col.key] === "PAUSED"
                                                 ? "bg-gray-500"
                                                 : ""
