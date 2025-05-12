@@ -1,0 +1,155 @@
+export const AdDefaultColumns = [
+  {id: "1",title: "Headline",key: "headlines",visible: true,category: "Recommended", isLocked:true },
+  {id: "2",title: "Ad group",key: "ad_group_name",visible: true,category: "Recommended", isLocked:false },
+  {id: "3",title: "Campaign ",key: "campaign",visible: true,category: "Recommended",  isLocked:false},
+  {id: "4",title: "Status",key: "status",visible: true,category: "Recommended",isLocked:false },
+  {id: "5",title: "status",key: "primary_status",visible: false,category: "Performance",isLocked:false  },
+  {id: "6",title: "Cost",key: "costs",visible: true,category: "Performance",format: 'rupees', isLocked:false },
+  {id: "7",title: "Labels",key: "labels",visible: false,category: "Attributes", isLocked:false },
+  {id: "8",title: "Impr.",key: "impressions",visible: true,category: "Performance",format: 'comma', isLocked:false },
+  {id: "9",title: "Ad Name",key: "ad_name",visible: false,category: "Attributes", isLocked:false },
+  {id: "10",title: "Final Url",key: "final_urls",visible: true,category: "Attributes",  isLocked:false},
+  // {id: "11",title: "Headline",key: "headlines",visible: false,category: "Attributes",  },
+  {id: "12",title: "Avg CPC",key: "average_cpc",visible: true,category: "Performance", isLocked:false },
+  {id: "13",title: "Clicks",key: "clicks",visible: true,category: "Performance", isLocked:false },
+  {id: "14",title: "Conversions",key: "conversions",visible: true,category: "Conversion",  isLocked:false},
+  {id: "15",title: "Cost/Conv.",key: "cost_per_conv",visible: false,category: "Conversion",isLocked:false  },
+  {id: "16",title: "CTR",key: "ctr",visible: false,category: "Performance",format: 'percentage', isLocked:false },];
+  
+  // Segments
+  export const AdSegmentDate = [
+  {key: "date",title: "Date",visible: true,category: "Performance",  },
+  {key: "cost",title: "Cost",visible: true,category: "Performance",  },
+  {key: "clicks",title: "Clicks",visible: true,category: "Performance",  },
+  {key: "impressions",title: "Impressions",visible: true,category: "Performance",  },
+  {key: "conversions",title: "Conversions",visible: true,category: "Performance",  },
+  {key: "cost_per_conversion",title: "Cost/Conv",visible: true,category: "Performance",  },
+  { key: "ctr", title: "Ctr", visible: true, category: "Performance" },
+  {key: "average_cpc",title: "Avg Cpc",visible: true,category: "Performance",  },
+  {key: "interaction_rate",title: "Interaction Rate",visible: true,category: "Performance",  },
+  {key: "interactions",title: "Interactions",visible: true,category: "Performance",  },];
+  
+  export const AdSegmentDeviceColumns = [
+    {id: "15",title: "Headline",key: "headlines",visible: true,category: "Content",  },
+  {id: "1",title: "Ad Group ID",key: "ad_group_id",visible: true,category: "Identification",  },
+  {id: "2",title: "Ad Group Name",key: "ad_group_name",visible: true,category: "Identification",  },
+  {id: "3",title: "Ad ID",key: "ad_id",visible: true,category: "Identification",  },
+  {id: "4",title: "Ad Name",key: "ad_name",visible: true,category: "Identification",  },
+  {id: "5",title: "Average CPC",key: "average_cpc",visible: true,category: "Performance",  },
+  {id: "6",title: "Clicks",key: "clicks",visible: true,category: "Performance",  },
+  {id: "7",title: "Conversions",key: "conversions",visible: true,category: "Performance",  },
+  {id: "8",title: "Conversion Rate",key: "conversions_rate",visible: true,category: "Performance",  },
+  {id: "9",title: "Cost",key: "cost",visible: true,category: "Performance",  },
+  {id: "10",title: "Cost Per Conversion",key: "cost_per_conversion",visible: true,category: "Performance",  },
+  {id: "11",title: "CTR",key: "ctr",visible: true,category: "Performance",  },
+  {id: "12",title: "Descriptions",key: "descriptions",visible: false,category: "Content",  },
+  {id: "13",title: "Device",key: "device",visible: true,category: "Audience",  },
+  {id: "14",title: "Final URLs",key: "final_urls",visible: false,category: "Destination",  },
+  {id: "16",title: "Impressions",key: "impressions",visible: true,category: "Performance",  },
+  {id: "17",title: "Interaction Rate",key: "interaction_rate",visible: true,category: "Performance",  },
+  {id: "18",title: "Interactions",key: "interactions",visible: true,category: "Performance",  },];
+  
+  export const AdSegmentNetworkColumns = [
+  {  id: "14",  title: "Headline",  key: "headlines",  visible: true,  category: "Content",},{  "id": "1",  "title": "Ad Group ID",  "key": "ad_group_id",  "visible": true,  "category": "Identification"},
+  {  "id": "18",  "title": "Network Type",  "key": "network_type",  "visible": true,  "category": "Settings"},
+  {  "id": "2",  "title": "Ad Group Name",  "key": "ad_group_name",  "visible": true,  "category": "Identification"},
+  {  "id": "3",  "title": "Ad ID",  "key": "ad_id",  "visible": true,  "category": "Identification"},
+  {  "id": "4",  "title": "Ad Name",  "key": "ad_name",  "visible": true,  "category": "Identification"},
+  {  "id": "5",  "title": "Average CPC",  "key": "average_cpc",  "visible": true,  "category": "Performance"},
+  {  "id": "6",  "title": "Clicks",  "key": "clicks",  "visible": true,  "category": "Performance"},
+  {  "id": "7",  "title": "Conversions",  "key": "conversions",  "visible": true,  "category": "Performance"},
+  {  "id": "8",  "title": "Conversions Rate",  "key": "conversions_rate",  "visible": true,  "category": "Performance"},
+  {  "id": "9",  "title": "Cost",  "key": "cost",  "visible": true,  "category": "Performance"},
+  {  "id": "10",  "title": "Cost Per Conversion",  "key": "cost_per_conversion",  "visible": true,  "category": "Performance"},
+  {  "id": "11",  "title": "CTR",  "key": "ctr",  "visible": true,  "category": "Performance"},
+  {  "id": "12",  "title": "Descriptions",  "key": "descriptions",  "visible": false,  "category": "Content"},
+  {  "id": "13",  "title": "Final URLs",  "key": "final_urls",  "visible": false,  "category": "Content"},
+  {  "id": "15",  "title": "Impressions",  "key": "impressions",  "visible": true,  "category": "Performance"},
+  {  "id": "16",  "title": "Interaction Rate",  "key": "interaction_rate",  "visible": true,  "category": "Performance"},
+  {  "id": "17",  "title": "Interactions",  "key": "interactions",  "visible": true,  "category": "Performance"}
+  ]
+  
+  export const AdSegmentClickTypeColumns = [
+  {"id": "15","title": "Headline","key": "headlines","visible": true,"category": "Content"},
+  {"id": "1","title": "Ad Group ID","key": "ad_group_id","visible": true,"category": "Identification"},
+  {"id": "2","title": "Ad Group Name","key": "ad_group_name","visible": true,"category": "Identification"},
+  {"id": "3","title": "Ad ID","key": "ad_id","visible": true,"category": "Identification"},
+  {"id": "4","title": "Ad Name","key": "ad_name","visible": true,"category": "Identification"},
+  {"id": "5","title": "Average CPC","key": "average_cpc","visible": true,"category": "Performance"},
+  {"id": "6","title": "Click Type","key": "click_type","visible": true,"category": "Interaction"},
+  {"id": "7","title": "Clicks","key": "clicks","visible": true,"category": "Interaction"},
+  {"id": "8","title": "Conversions","key": "conversions","visible": true,"category": "Conversion"},
+  {"id": "9","title": "Conversion Rate","key": "conversions_rate","visible": true,"category": "Conversion"},
+  {"id": "10","title": "Cost","key": "cost","visible": true,"category": "Performance"},
+  {"id": "11","title": "Cost Per Conversion","key": "cost_per_conversion","visible": true,"category": "Conversion"},
+  {"id": "12","title": "CTR","key": "ctr","visible": true,"category": "Performance"},
+  {"id": "13","title": "Descriptions","key": "descriptions","visible": false,"category": "Content"},
+  {"id": "14","title": "Final URLs","key": "final_urls","visible": false,"category": "Content"},
+  {"id": "16","title": "Impressions","key": "impressions","visible": true,"category": "Interaction"},
+  {"id": "17","title": "Interaction Rate","key": "interaction_rate","visible": true,"category": "Interaction"},
+  {"id": "18","title": "Interactions","key": "interactions","visible": true,"category": "Interaction"}
+  ]
+  export const AdSegmentTopVsOtherColumns = [
+    
+    {"id": "14","title": "Headline","key": "headlines","visible": true,"category": "Content"},
+  {"id": "1","title": "Ad Group ID","key": "ad_group_id","visible": true,"category": "Identification"},
+  {"id": "2","title": "Ad Group Name","key": "ad_group_name","visible": true,"category": "Identification"},
+  {"id": "3","title": "Ad ID","key": "ad_id","visible": true,"category": "Identification"},
+  {"id": "4","title": "Ad Name","key": "ad_name","visible": true,"category": "Identification"},
+  {"id": "5","title": "Average CPC","key": "average_cpc","visible": true,"category": "Performance"},
+  {"id": "6","title": "Clicks","key": "clicks","visible": true,"category": "Interaction"},
+  {"id": "7","title": "Conversions","key": "conversions","visible": true,"category": "Conversion"},
+  {"id": "8","title": "Conversion Rate","key": "conversions_rate","visible": true,"category": "Conversion"},
+  {"id": "9","title": "Cost","key": "cost","visible": true,"category": "Performance"},
+  {"id": "10","title": "Cost Per Conversion","key": "cost_per_conversion","visible": true,"category": "Conversion"},
+  {"id": "11","title": "CTR","key": "ctr","visible": true,"category": "Performance"},
+  {"id": "12","title": "Descriptions","key": "descriptions","visible": false,"category": "Content"},
+  {"id": "13","title": "Final URLs","key": "final_urls","visible": false,"category": "Content"},
+  {"id": "15","title": "Impressions","key": "impressions","visible": true,"category": "Interaction"},
+  {"id": "16","title": "Interaction Rate","key": "interaction_rate","visible": true,"category": "Interaction"},
+  {"id": "17","title": "Interactions","key": "interactions","visible": true,"category": "Interaction"},
+  {"id": "18","title": "Slot","key": "slot","visible": true,"category": "Placement"
+    }
+  ]
+  // Groups
+  export const AdGroupColumns = [
+    { id: 0, title: "Group Name", key: "group_name", visible: true },
+  { id: 0, title: "Avg Cpc", key: "average_cpc", visible: true },
+  { id: 0, title: "Costs", key: "costs", visible: true },
+  { id: 0, title: "Ctr", key: "ctr", visible: true },
+  { id: 0, title: "Clicks", key: "clicks", visible: true },
+  { id: 0, title: "Impressions", key: "impressions", visible: true },
+  { id: 0, title: "Avg Cpm", key: "average_cpm", visible: true },
+  {id: 0,title: "Conversion Rate",key: "conversion_rate",visible: true,  },
+  { id: 0, title: "Conversions", key: "conversions", visible: true },
+  { id: 0, title: "Cost/Conv", key: "cost_per_conv", visible: true },];
+  
+  // Compare
+  export const AdCompareColumns = [
+    {title: "Ad Name",key: "ad_group_name",visible: true,category: "Recommended",  },
+  {title: "ad_name",key: "ad_name",visible: false,category: "Recommended",  },
+  {title: "Campaign",key: "campaign",visible: false,category: "Recommended",  },
+  {title: "Impression",key: "impressions",visible: true,category: "Performance",  },
+  {title: "Impressions  ",key: "impressions_percent_diff",visible: true,percentage_diff: true,category: "Performance",  },
+  {title: "Clicks",key: "clicks",visible: true,category: "Performance",  },
+  {title: "Clicks  ",key: "clicks_percent_diff",visible: true,percentage_diff: true,category: "Performance",  },
+  {title: "Cost",key: "costs",visible: true,category: "Performance",  },
+  {title: "Cost  ",key: "costs_percent_diff",visible: true,percentage_diff: true,category: "Performance",  },
+  {title: "Ctr",key: "ctr",visible: true,category: "Performance",  },
+  {title: "Ctr  ",key: "ctr_percent_diff",visible: true,percentage_diff: true,category: "Performance",  },
+  {title: "Conversion",key: "conversion",visible: true,category: "Performance",  },
+  {title: "Conversion  ",key: "conversion_percent_diff",visible: true,percentage_diff: true,category: "Performance",  },
+  {title: "Conversion_rate",key: "conversion_rate",visible: true,category: "Performance",  },
+  {title: "Conversion_rate  ",key: "conversion_rate_percent_diff",visible: true,percentage_diff: true,category: "Performance",  },
+  {title: "Cost/conv",key: "cost_per_conv",visible: true,category: "Performance",  },
+  {title: "Cost/conv  ",key: "cost_per_conv_percent_diff",visible: true,percentage_diff: true,category: "Performance",  },
+  {title: "Avg Cpc",key: "avg_cpc",visible: true,category: "Performance",  },
+  {title: "Avg Cpc  ",key: "average_cpc_percent_diff",visible: true,percentage_diff: true,category: "Performance",  },
+  {title: "Id",key: "ad_id",visible: false,category: "Performance",  },
+  {title: "Description",key: "descriptions",visible: false,category: "Recommended",  },
+  {title: "Final Urls",key: "final_urls",visible: false,category: "Recommended",  },
+  {title: "Headline",key: "headlines",visible: false,category: "Recommended",  },
+  {title: "Primary Status",key: "primary_status",visible: false,category: "Recommended",  },
+  {title: "Primary Status Reason",key: "primary_status_reason",visible: false,category: "Recommended",  },
+  {title: "Status",key: "status",visible: false,category: "Recommended",  },];
+  

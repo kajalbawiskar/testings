@@ -1,0 +1,13 @@
+export { default as confilogo } from './confi-logo.png';
+export { default as Forgetbg } from './Forgot-password.jpg';
+export { default as GoogleLogo } from './Google-logo.png';
+export { default as GoogleLogo2 } from './Google-logo2.png';
+export { default as Amazon } from './amazon.png';
+export { default as flipkartlogo } from './flipkart-logo.png';
+export { default as YoutubeLogo } from './Youtube-logo.png';
+export { default as Thinking } from './Thinking.png';
+export { default as DigitalMarketing } from './Digital-Marketing.gif';
+export { default as AmazonPlatform } from './Amazon-platform.png';
+export { default as Flipkart } from './Flipkart.png';
+export { default as YouTube } from './Youtube.png';
+export { default as GoogleAds } from './Google-Ads.png';

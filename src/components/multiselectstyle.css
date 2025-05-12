@@ -1,0 +1,25 @@
+.e-multi-select-wrapper {
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    color: #1a202c;
+    font-size: 0.875rem; /* Equivalent to text-sm in Tailwind CSS */
+    border-radius: 0.375rem;
+    display: block;
+    width: 100%;
+    padding: 0.625rem; /* Equivalent to p-2.5 in Tailwind CSS */
+  }
+  
+  .e-multi-select-wrapper:focus {
+    outline: none;
+    border-color: #3b82f6; /* Equivalent to focus:ring-blue-500 and focus:border-blue-500 in Tailwind CSS */
+  }
+  
+  .e-multi-select-wrapper.dark {
+    background-color: #4a5568; /* Equivalent to dark:bg-gray-700 in Tailwind CSS */
+    border-color: #2d3748; /* Equivalent to dark:border-gray-600 in Tailwind CSS */
+    color: #fff; /* Equivalent to dark:text-white in Tailwind CSS */
+  }
+  
+  .e-multi-select-wrapper::placeholder {
+    color: #a0aec0; /* Equivalent to dark:placeholder-gray-400 in Tailwind CSS */
+  }

@@ -1,0 +1,24 @@
+/* CustomDateRangePicker.css */
+.rdrDateRangePickerWrapper {
+    @apply text-base; /* Adjust the font size as needed */
+  }
+  
+  .rdrDefinedRanges {
+    @apply text-base; /* Adjust the font size as needed */
+  }
+  
+  .rdrMonthAndYearPickers {
+    @apply text-base; /* Adjust the font size as needed */
+  }
+  
+  .rdrCalendarWrapper {
+    @apply text-base; /* Adjust the font size as needed */
+  }
+  
+  .rdrStaticRangeLabel {
+    @apply text-base; /* Adjust the font size as needed */
+  }
+
+  .rdrInputRange {
+    @apply text-base;
+  }
