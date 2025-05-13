@@ -46,47 +46,49 @@ const AddTable = ({
 }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const [createdTables, setCreatedTables] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+const defaultTables = ["campaignType"];
+const [createdTables, setCreatedTables] = useState(defaultTables); // show default instantly
 
   // Fetch saved tables from backend
   useEffect(() => {
-    const fetchTables = async () => {
-      if (!userId) {
-        setCreatedTables([]);
-        setLoading(false);
-        return;
+  const fetchTables = async () => {
+    if (!userId) {
+      setCreatedTables(defaultTables); // fallback
+      setLoading(false);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/user-tables?userId=${userId}`);
+      const data = await res.json();
+
+      let tables = [];
+
+      if (res.ok && Array.isArray(data)) {
+        // Merge backend tables with default ones
+        tables = Array.from(new Set([...defaultTables, ...data]));
+        await saveTables(tables); // ensure saved in backend
+      } else {
+        tables = [...defaultTables];
+        await saveTables(tables);
       }
 
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/user-tables?userId=${userId}`);
-        const data = await res.json();
+      setCreatedTables(tables);
+    } catch (err) {
+      console.error("Error loading saved tables:", err);
+      setError("Failed to load saved tables.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        if (res.ok && Array.isArray(data)) {
-          let tables = [...data];
-          // Ensure CampaignType is added by default
-          if (!tables.includes("campaignType")) {
-            tables.push("campaignType");
-            await saveTables(tables);
-          }
+  fetchTables();
+}, [userId]);
 
-          setCreatedTables(tables);
-        } else {
-          throw new Error("Invalid data format");
-        }
-      } catch (err) {
-        console.error("Error loading saved tables:", err);
-        setError("Failed to load saved tables.");
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchTables();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
   const saveTables = async (tables) => {
     if (!userId) return;
     try {

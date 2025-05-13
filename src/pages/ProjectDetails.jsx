@@ -15,11 +15,6 @@ import { IoIosArrowBack } from "react-icons/io";
 import ModifyCardsDrag from "./Tools/ModifyCardDrag";
 import CampaignTable from "./AddTable/CampaignType"; // adjust path as needed
 
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
-import * as XLSX from "xlsx";
-import FileSaver from "file-saver";
-
 // import { FaAngleDown } from "react-icons/fa6";
 
 import { Link } from "react-router-dom";
@@ -39,103 +34,6 @@ const ProjectDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [showDownloadOptions, setShowDownloadOptions] = useState(false);
-  function downloadData(format) {
-    const visibleColumns = columns.filter((col) => col.visible);
-    const headers = visibleColumns.map((col) => col.title);
-    const rows = campaignData.map((item) =>
-      visibleColumns.map((col) => {
-        let campaignTypeKey = Object.keys(item)[0];
-        let campaignObjectValues = Object.values(item)[0];
-        if (col.key === "Campaign Type") {
-          return campaignTypeKey;
-        }
-        if (col.key === "cost") {
-          return numberWithCommas(
-            (campaignObjectValues[col.key] / 1000000).toFixed(0)
-          );
-        }
-
-        if (col.key === "ctr") {
-          return (
-            numberWithCommas(campaignObjectValues[col.key].toFixed(2)) + "%"
-          );
-        }
-        if (col.key === "leads") {
-          return campaignObjectValues["conversion"];
-        }
-
-        if (col.key === 'Total Budget for "this month"') {
-          if (item.totalBudget == undefined) {
-            return String(0);
-          } else {
-            return String(item.totalBudget);
-          }
-        }
-
-        if (col.key === "Remaining Budget") {
-          let campaignStats = item[campaignTypeKey];
-          let remainingBudgetTemp = numberWithCommas(
-            campaignStats.remaining_budget.toFixed(0)
-          );
-
-          if (item.totalBudget != undefined) {
-            if (String(item.totalBudget).length > 1) {
-              remainingBudgetTemp = numberWithCommas(
-                Number(item.remainingBudget).toFixed(0)
-              );
-            }
-          }
-          return remainingBudgetTemp;
-        }
-        return campaignObjectValues[col.key];
-      })
-    );
-    if (format === "pdf") {
-      const doc = new jsPDF();
-      autoTable(doc, { head: [headers], body: rows });
-      doc.save("data.pdf");
-    } else if (format === "csv" || format === "excel") {
-      const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-      if (format === "csv") {
-        XLSX.writeFile(wb, "data.csv");
-      } else {
-        XLSX.writeFile(wb, "data.xlsx");
-      }
-    } else if (format === "xml") {
-      let obj = `<root>\n`;
-      rows.map((i) => {
-        obj += `\t<row>\n`;
-        visibleColumns.map((j, index) => {
-          obj += `\t\t<${j.title}>${i[index]}</${j.title}>\n`;
-        });
-        obj += `\t</row>\n`;
-      });
-      obj += `</root>\n`;
-      const blob = new Blob([obj], { type: "application/xml" });
-      FileSaver.saveAs(blob, "data.xml");
-    } else if (format === "google_sheets") {
-      const csvContent = [
-        headers.join(","),
-        ...rows.map((row) => row.join(",")),
-      ].join("\n");
-      const blob = new Blob([csvContent], { type: "text/csv" });
-      const url = `https://docs.google.com/spreadsheets/d/your-sheet-id/edit?usp=sharing`;
-      window.open(url, "_blank");
-      FileSaver.saveAs(blob, "data.csv");
-    }
-
-    setShowDownloadOptions(false);
-  }
-
-  const toTitleCase = (str) => {
-    return str
-      .toLowerCase()
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-  };
 
   let d = new Date();
   let month = d.getMonth();
@@ -154,7 +52,6 @@ const ProjectDetails = () => {
     "December",
   ];
   const [selectedMonth, setSelectedMonth] = useState(months[month]);
-  const [isOpen, setIsOpen] = useState(false);
   let [columns, setColumns] = useState([
     {
       id: "0",
@@ -473,19 +370,7 @@ const ProjectDetails = () => {
     setCardTotal([...cardObjArr, ...appendedCardTotals]);
   };
 
-  const changeCardCheckbox = (e) => {
-    let value = e.target.checked;
-    let key = e.target.getAttribute("data-key");
 
-    let newCardObjArr = cardObjectArray.map((item) => {
-      if (key == item.key) {
-        item.visible = value;
-      }
-      return item;
-    });
-
-    setCardObjectArray(newCardObjArr);
-  };
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -655,9 +540,7 @@ const ProjectDetails = () => {
     fetchCardTotal();
   }, []);
 
-  const calculateRemainingBudget = (cost, totalBudget) => {
-    return (totalBudget - cost).toFixed(2);
-  };
+ 
   const formatButtonLabel = () => {
     const { startDate, endDate } = state[0];
     if (
@@ -758,29 +641,6 @@ const ProjectDetails = () => {
       console.error("Error fetching ad group data:", error);
     });
   };
-  const openColumnsMenu = () => {
-    setShowColumnsMenu(true);
-    setTableVisible(false);
-  };
-  const toggleColumnVisibility = (key) => {
-    setColumns(
-      columns.map((col) =>
-        col.key === key && !col.locked ? { ...col, visible: !col.visible } : col
-      )
-    );
-  };
-  const applyChanges = () => {
-    setShowColumnsMenu(false);
-    setTableVisible(true);
-  };
-
-  const cancelChanges = () => {
-    setShowColumnsMenu(false);
-    setTableVisible(true);
-  };
-  function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
 
   return (
     <>
@@ -922,7 +782,7 @@ const ProjectDetails = () => {
               {isGoogleAdsConnected ? (
                 <div className="mt-8 w-full ">
                   
-                  <>
+                  {/* <>
                     <CampaignTable
                       email={email}
                       uniqueCategories={uniqueCategories}
@@ -931,7 +791,7 @@ const ProjectDetails = () => {
                       CampaignTable={CampaignTable}
                       setCardTotalFunction={setCardTotalFunction}
                     />
-                  </>
+                  </> */}
                   <div className="text-left mt-4 ">
                     <div className="py-5">
                       <AddTable
