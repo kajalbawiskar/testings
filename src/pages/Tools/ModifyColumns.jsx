@@ -244,6 +244,9 @@ function ModifyColumns({
           </div>
         </div>
       </div>
+
+      {/* Show Custom Column Form if active */}
+
       <>
         <div className="flex ">
           <div className=" h-56 w-3/4">
@@ -380,4 +383,5 @@ function ModifyColumns({
     </div>
   );
 }
+
 export default ModifyColumns;
